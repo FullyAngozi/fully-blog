@@ -23,7 +23,7 @@ export function HeroPost({
 }: Props) {
   return (
     <section>
-      <div className="mb-8 md:mb-16">
+      <div className="mb-8 md:mb-16 border border-green-600">
         <CoverImage title={title} src={coverImage} slug={slug} />
       </div>
       <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
@@ -38,7 +38,9 @@ export function HeroPost({
           </div>
         </div>
         <div>
-          <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
+          <Link href={`/posts/${slug}`}>
+            <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
+          </Link>
           <Avatar name={author.name} picture={author.picture} />
         </div>
       </div>
