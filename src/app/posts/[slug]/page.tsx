@@ -8,13 +8,11 @@ import { PostBody } from '@/app/_components/post-body'
 
 export const revalidate = 60
 
-type Params = { params: { slug: string } }
-
 export async function generateStaticParams() {
   return allPosts.map(post => ({ slug: post.slug }))
 }
 
-export async function generateMetadata({ params }: Params) {
+export async function generateMetadata({ params }) {
   const{ slug } = await params
   const post =  allPosts.find(p => p.slug === slug)
   if (!post) return notFound()
@@ -28,7 +26,7 @@ export async function generateMetadata({ params }: Params) {
   }
 }
 
-export default async function PostPage({ params }: Params) {
+export default async function PostPage({ params }) {
   const {slug }=  await params
   const post =  allPosts.find(p => p.slug === slug)
   if (!post) return notFound()
