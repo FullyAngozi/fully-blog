@@ -6,21 +6,22 @@
     "start": "next start"
   },
   "dependencies": {
-    "@sanity/icons": "^3.7.0",
-    "@sanity/image-url": "^1.1.0",
-    "@sanity/vision": "^3.82.0",
+    "@contentlayer/core": "^0.3.4",
     "classnames": "^2.5.1",
+    "contentlayer": "^0.3.4",
     "date-fns": "^3.6.0",
     "dotenv": "^16.4.7",
     "gray-matter": "^4.0.3",
     "next": "15.0.2",
-    "next-sanity": "^9.9.9",
+    "next-contentlayer": "^0.3.4",
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-dom": "19.0.0-rc-02c0e824-20241028",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-slug": "^6.0.0",
     "remark": "^15.0.1",
+    "remark-gfm": "^4.0.1",
     "remark-html": "^16.0.1",
     "remark-parse": "^11.0.0",
-    "sanity": "^3.82.0",
     "styled-components": "^6.1.17",
     "unified": "^11.0.5"
   },
@@ -32,6 +33,5 @@
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.5.2"
-  },
-  "type": "module"
+  }
 }

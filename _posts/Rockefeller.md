@@ -6,7 +6,8 @@ date: "2025-04-29T10:00:00.000Z"
 author:
   name: oc
   picture: "/assets/blog/authors/Oc.webp"
-ogImage: "/assets/blog/rockefeller/cover.png"
+ogImage:
+    url:  "/assets/blog/rockefeller/cover.png"
 ---
 
 John D. Rockefeller didn’t just enter the oil business—he reinvented it. In an era of wild speculation and inefficiency, he brought calculated strategy and precision. Through Standard Oil, Rockefeller built one of the most powerful monopolies in history and became America’s first billionaire. But how exactly did he pull it off?

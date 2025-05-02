@@ -1,29 +1,14 @@
-import { Post } from "@/interfaces/post";
-import fs from "fs";
-import matter from "gray-matter";
-import { join } from "path";
+// lib/api.ts
+import { allPosts, type Post } from 'contentlayer/generated';
 
-const postsDirectory = join(process.cwd(), "_posts");
-
-export function getPostSlugs() {
-  return fs.readdirSync(postsDirectory);
-}
-
-export function getPostBySlug(slug: string) {
-  const realSlug = slug.replace(/\.md$/, "");
-  const fullPath = join(postsDirectory, `${realSlug}.md`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-  const { data, content } = matter(fileContents);
-
-
-  return { ...data, slug: realSlug, content } as Post;
-}
-
+// Return all posts sorted by date (newest first).
 export function getAllPosts(): Post[] {
-  const slugs = getPostSlugs();
-  const posts = slugs
-    .map((slug) => getPostBySlug(slug))
-    // sort posts by date in descending order
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
-  return posts;
+  return [...allPosts].sort((a, b) => (a.date > b.date ? -1 : 1))
 }
+
+// Find a single post by its slug.
+export function getPostBySlug(slug: string): Post | undefined {
+  return allPosts.find(post => post.slug === slug);
+}
+
+

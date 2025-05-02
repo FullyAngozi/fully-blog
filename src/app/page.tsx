@@ -4,13 +4,20 @@ import { Intro } from "@/app/_components/intro";
 import { MoreStories } from "@/app/_components/more-stories";
 import { getAllPosts } from "@/lib/api";
 
-export default function Index() {
+export default async function Index() {
   const allPosts = getAllPosts();
+
+  if (allPosts.length === 0) {
+    return (
+      <Container>
+        <p>No blog posts found.</p>
+      </Container>
+    );
+  }
 
   const heroPost = allPosts[0];
 
-  const morePosts = allPosts.slice(1);
-
+  const morePosts = allPosts.length > 1 ? allPosts.slice(1) : [];
   return (
     <main>
       <Container>

@@ -1,22 +1,37 @@
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { getAllPosts, getPostBySlug } from "@/lib/api";
-import { CMS_NAME } from "@/lib/constants";
-import markdownToHtml from "@/lib/markdownToHtml";
-import Container from "@/app/_components/container";
-import Header from "@/app/_components/header";
-import { PostBody } from "@/app/_components/post-body";
-import { PostHeader } from "@/app/_components/post-header";
+// app/posts/[slug]/page.tsx
+import { allPosts } from 'contentlayer/generated'
+import { notFound } from 'next/navigation'
+import Container from '@/app/_components/container'
+import Header from '@/app/_components/header'
+import { PostHeader } from '@/app/_components/post-header'
+import { PostBody } from '@/app/_components/post-body'
 
-export default async function Post(props: Params) {
-  const params = await props.params;
-  const post = getPostBySlug(params.slug);
+export const revalidate = 60
 
-  if (!post) {
-    return notFound();
+type Params = { params: { slug: string } }
+
+export async function generateStaticParams() {
+  return allPosts.map(post => ({ slug: post.slug }))
+}
+
+export async function generateMetadata({ params }: Params) {
+  const{ slug } = await params
+  const post =  allPosts.find(p => p.slug === slug)
+  if (!post) return notFound()
+
+  const title = `${post.title} | ${post.author.name || ''}`
+  const images = post.ogImage?.url ? [post.ogImage.url] : []
+
+  return {
+    title,
+    openGraph: { title, images },
   }
+}
 
-  const content = await markdownToHtml(post.content || "");
+export default async function PostPage({ params }: Params) {
+  const {slug }=  await params
+  const post =  allPosts.find(p => p.slug === slug)
+  if (!post) return notFound()
 
   return (
     <main>
@@ -29,46 +44,10 @@ export default async function Post(props: Params) {
             date={post.date}
             author={post.author}
           />
-          <PostBody content={content} />
+          {/* Render the post content as HTML */}
+          <PostBody content={post.body.html} />
         </article>
       </Container>
     </main>
-  );
-}
-
-///////
-
-type Params = {
-  params: Promise<{
-    slug: string;
-  }>;
-};
-
-export async function generateMetadata(props: Params): Promise<Metadata> {
-  const params = await props.params;
-  const post = getPostBySlug(params.slug);
-
-  if (!post) {
-    return notFound();
-  }
-
-  const title = `${post.title} | Next.js Blog Example with ${CMS_NAME}`;
-
-  return {
-    title,
-    openGraph: {
-      title,
-      images: [post.ogImage.url],
-    },
-  };
-}
-
-/////
-
-export async function generateStaticParams() {
-  const posts = getAllPosts();
-
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  )
 }
