@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: `Fully Blog`,
-  description: `A sports blog that covers modern nba players, their development and contracts`,
+  description: `blog content about this i find interesting`,
   openGraph: {
     images: [HOME_OG_IMAGE_URL],
   },
