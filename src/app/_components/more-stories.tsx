@@ -1,9 +1,7 @@
-import { Post } from "@/interfaces/post";
+import type { Post } from "contentlayer/generated";
 import { PostPreview } from "./post-preview";
 
-type Props = {
-  posts: Post[];
-};
+type Props = {posts: Post[];};
 
 export function MoreStories({ posts }: Props) {
   return (
