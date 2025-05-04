@@ -5,6 +5,7 @@ import Container from '@/app/_components/container'
 import Header from '@/app/_components/header'
 import { PostHeader } from '@/app/_components/post-header'
 import { PostBody } from '@/app/_components/post-body'
+import type { Metadata } from 'next'
 
 export const revalidate = 60
 
@@ -12,12 +13,14 @@ export async function generateStaticParams() {
   return allPosts.map(post => ({ slug: post.slug }))
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const{ slug } = await params
-  const post =  allPosts.find(p => p.slug === slug)
+export async function generateMetadata(
+  { params }: { params: Promise<{ slug: string }> }
+): Promise<Metadata> {
+  const { slug } = await params
+  const post = allPosts.find(p => p.slug === slug)
   if (!post) return notFound()
 
-  const title = `${post.title} | ${post.author.name || ''}`
+  const title = `${post.title} | ${post.author.name}`
   const images = post.ogImage?.url ? [post.ogImage.url] : []
 
   return {
@@ -26,9 +29,11 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default async function PostPage({ params }: { params: { slug: string } }) {
-  const {slug }=  await params
-  const post =  allPosts.find(p => p.slug === slug)
+export default async function PostPage(
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const { slug } = await params
+  const post = allPosts.find(p => p.slug === slug)
   if (!post) return notFound()
 
   return (
@@ -42,7 +47,6 @@ export default async function PostPage({ params }: { params: { slug: string } })
             date={post.date}
             author={post.author}
           />
-          {/* Render the post content as HTML */}
           <PostBody content={post.body.html} />
         </article>
       </Container>
