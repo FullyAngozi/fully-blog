@@ -12,7 +12,7 @@ export async function generateStaticParams() {
   return allPosts.map(post => ({ slug: post.slug }))
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ params }: { params: { slug: string } }) {
   const{ slug } = await params
   const post =  allPosts.find(p => p.slug === slug)
   if (!post) return notFound()
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function PostPage({ params }) {
+export default async function PostPage({ params }: { params: { slug: string } }) {
   const {slug }=  await params
   const post =  allPosts.find(p => p.slug === slug)
   if (!post) return notFound()
