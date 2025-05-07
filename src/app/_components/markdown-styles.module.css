@@ -1,5 +1,6 @@
 .markdown {
-  @apply text-lg leading-relaxed;
+  @apply text-lg leading-loose md:text-2xl ;
+
 }
 
 .markdown p,

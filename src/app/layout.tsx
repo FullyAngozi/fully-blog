@@ -58,9 +58,12 @@ export default function RootLayout({
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       </head>
       <body
-        className={cn(inter.className, "dark:bg-[#080c0d] dark:text-[#e4e7e9]")}
-      >
-        <ThemeSwitcher />
+  className={cn(
+    "text-[17px] leading-[160%] dark:bg-[#080c0d] dark:text-[#e4e7e9]"
+  )}
+  style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}
+>
+
         <div className="min-h-screen">{children}</div>
         <Footer />
       </body>
