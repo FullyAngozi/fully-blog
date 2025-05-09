@@ -17,3 +17,35 @@
 .markdown h3 {
   @apply text-2xl mt-8 mb-4 leading-snug;
 }
+
+.markdown p {
+  color: #333333;
+  margin-bottom: 1rem;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  .markdown {
+    color: #E4E7E9; /* Light gray for dark mode */
+    background-color: #080c0d; /* Optional: dark background */
+  }
+
+  .markdown h1,
+  .markdown h2,
+  .markdown h3 {
+    color: #ffffff;
+  }
+
+  .markdown p {
+    color: #cccccc;
+  }
+
+  .markdown a {
+    color: #1e90ff;
+  }
+
+  .markdown blockquote {
+    color: #aaaaaa;
+    border-left-color: #555555;
+  }
+}

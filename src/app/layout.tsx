@@ -56,6 +56,7 @@ export default function RootLayout({
         />
         <meta name="theme-color" content="#000" />
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+        <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
       </head>
       <body
   className={cn(

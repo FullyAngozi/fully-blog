@@ -39,7 +39,7 @@ export function HeroPost({
         </div>
         <div>
           <Link href={`/posts/${slug}`}>
-            <p className="text-xl leading-relaxed mb-4">{excerpt}</p>
+            <p className="text-xl leading-relaxed mb-4 dark:text-gray-400">{excerpt}</p>
           </Link>
           <Avatar name={author.name} picture={author.picture} />
         </div>
